@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html 
+	lang="zh_CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+<link rel="stylesheet" href="/css/layout.css">
+
+		
+		<title> E1编码译码 -  银月の小窝</title>
+		<link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+		<script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+		<!-- lazyload -->
+		<script src="https://unpkg.com/lazysizes@5.1.0/lazysizes.min.js"></script>
+		<!-- smooth-scrolling -->
+		<script src="https://unpkg.com/smooth-scrolling.js@1.0.0"></script>
+		<!-- highlight -->
+		<link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.6.0/styles/atom-one-dark.min.css" />
+		<script src="//unpkg.com/@highlightjs/cdn-assets@11.6.0/highlight.min.js"></script>
+		<!-- 预置 kiraicon -->
+		<link rel="stylesheet" href="/lib/iconfont/iconfont.css" crossorigin />
+		
+			<link rel="stylesheet" href="//at.alicdn.com/t/font_3299330_el19bsi97h8.css" crossorigin />
+		
+		<link rel="stylesheet" href="/lib/iconfont/iconfont.css" crossorigin />
+		<link
+			rel="shortcut icon"
+			href="https://assets.kira.host/Pictures/Others/116359b4ccf19917.jpg"
+			type="image/png"
+		/>
+		<link rel="stylesheet" href="/deps/css/APlayer.min.css">
+		
+		<script src="/deps/js/APlayer.min.js"></script>
+		<script src="/deps/js/Meting.min.js"></script>
+	<meta name="generator" content="Hexo 6.3.0"></head>
+
+	<body>
+		<div
+			class="kira-background"
+			style="background-image: url('https://assets.kira.host/Pictures/Others/-f0d5cc34c6e5aa7_compressed.jpg')"
+		></div>
+		<div class="kira-header">
+    <a
+        class="kira-drawer-button mdui-ripple"
+        title="导航栏"
+        onclick="document.querySelector('.kira-sidebar-modal').classList.add('show');document.querySelector('.kira-sidebar#sidebar').classList.add('show');"
+    >
+        <i class="kirafont icon-menu"></i>
+    </a>
+    <a href="/" title="银月の小窝">
+        <img
+			src="https://raw.githubusercontent.com/qs77544/pic/main/QQ图片20230406144244.jpg"
+			alt="银月"
+		/>
+    </a>
+</div>
+		<div class="kira-body">
+			<div class="kira-sidebar" id="sidebar">
+	<div class="kira-avatar mdui-ripple">
+		<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/qs77544/pic/main/QQ图片20230406144244.jpg" title="银月">
+			<img
+				src="https://raw.githubusercontent.com/qs77544/pic/main/QQ图片20230406144244.jpg"
+				alt="银月"
+			/>
+		</a>
+	</div>
+	<div class="kira-count">
+		<div><span>文章</span>3</div>
+		<div><span>标签</span>4</div>
+		<div><span>分类</span>0</div>
+	</div>
+	<div class="kira-list">
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/"
+			title="回到首页"
+		>
+			<i
+				class="kirafont icon-home"
+			></i>
+			<div class="kira-list-item-content">回到首页</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/archive.html"
+			title="文章归档"
+		>
+			<i
+				class="kirafont icon-container"
+			></i>
+			<div class="kira-list-item-content">文章归档</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/about.html"
+			title="关于本人"
+		>
+			<i
+				class="kirafont icon-user"
+			></i>
+			<div class="kira-list-item-content">关于本人</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/friends.html"
+			title="我的朋友"
+		>
+			<i
+				class="kirafont icon-team"
+			></i>
+			<div class="kira-list-item-content">我的朋友</div>
+		</a>
+		
+	</div>
+	<aside id="kira-sidebar">
+		 <div class="kira-widget-wrap">
+	<div class="kira-widget kira-social">
+		<a
+			class="mdui-ripple"
+			href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=972527342&website=www.oicqzone.com"
+			target="_blank"
+			mdui-tooltip="{content: 'QQ'}"
+			style="
+				color: rgb(49, 174, 255);
+				background-color: rgba(49, 174, 255, .1);
+			"
+		>
+			<i
+				class="kirafont icon-QQ"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://space.bilibili.com/8456366"
+			target="_blank"
+			mdui-tooltip="{content: '哔哩哔哩'}"
+			style="
+				color: rgb(231, 106, 141);
+				background-color: rgba(231, 106, 141, .15);
+			"
+		>
+			<i
+				class="kirafont icon-bilibili"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://github.com/qs77544/"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(25, 23, 23);
+				background-color: rgba(25, 23, 23, .15);
+			"
+		>
+			<i
+				class="kirafont icon-github"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://gitee.com/qs77544"
+			target="_blank"
+			mdui-tooltip="{content: 'Gitee'}"
+			style="
+				color: rgb(165, 15, 15);
+				background-color: rgba(165, 15, 15, .15);
+			"
+		>
+			<i
+				class="kirafont icon-gitee"
+			></i> </a
+		>
+	</div>
+</div>
+    
+<div class="kira-widget-wrap">
+	<div id="randomtagcloud" class="kira-widget tagcloud kira-rainbow"><a href="/tags/E1/" style="font-size: 10px;">E1</a> <a href="/tags/e1/" style="font-size: 10px;">e1</a> <a href="/tags/hdb3/" style="font-size: 10px;">hdb3</a> <a href="/tags/verilog/" style="font-size: 20px;">verilog</a></div>
+	
+</div>
+
+  
+<div class="kira-widget-wrap">
+	<h3 class="kira-widget-title">文章归档</h3>
+	<div class="kira-widget">
+		<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">3</span></li></ul>
+	</div>
+</div>
+
+ 
+	</aside>
+	<div class="kira-copyright">
+		&copy; 2023
+		<a href="/">银月</a
+		>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> &
+		<!-- TODO: github 链接 -->
+		<a href="https://github.com/ch1ny/kira-hexo/" target="_blank">Kira-Hexo</a>
+		<br />
+		
+			<a href="https://beian.miit.gov.cn/" target="_blank">赣ICP备2021007955号-3</a>
+		
+		
+	</div>
+</div>
+<div class="kira-sidebar-modal" id="sidebar-modal" onclick="(function(self) {
+	self.classList.remove('show');
+	document.querySelector('.kira-sidebar.show#sidebar').classList.remove('show');
+})(this)"></div>
+			<div class="kira-content">
+				<div id="kira-top-header"></div>
+				<div class="kira-main-content">
+					
+<link rel="stylesheet" href="/css/kira-image.css">
+
+<script src="/js/kira-image.js"></script>
+<div class="kira-image">
+    <div class="kira-image-modal">
+        <div class="kira-image-header">
+            <div class="kira-image-counter"></div>
+            <div class="kira-image-title"></div>
+            <div class="kira-image-operation">
+                <div class="kira-image-operation-button" id="kira-image-operation-button-zoom">
+                    <i class="kirafont icon-zoom-in"></i>
+                </div>
+                <div class="kira-image-operation-button" id="kira-image-operation-button-close">
+                    <i class="kirafont icon-close"></i>
+                </div>
+            </div>
+        </div>
+        <div class="kira-image-container">
+            <div class="kira-image-prev-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-left"></i>
+                </div>
+            </div>
+            <div class="kira-image-list">
+                <div class="kira-image-prev">
+                    <img />
+                </div>
+                <div class="kira-image-now">
+                    <img />
+                </div>
+                <div class="kira-image-next">
+                    <img />
+                </div>
+            </div>
+            <div class="kira-image-next-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="kira-post">
+	<article>
+		
+		<div class="kira-post-cover">
+			<img
+				data-src="https://raw.githubusercontent.com/qs77544/pic/main/98903239_p0.jpg"
+				data-sizes="auto"
+				alt="E1编码译码"
+				class="lazyload kira-post-cover-image disabled-kira-image"
+			/>
+			<h1>E1编码译码</h1>
+		</div>
+		
+		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
+			<a><i class="kirafont icon-calendar-fill"></i>2023年04月06日</a>
+			<a><i class="kirafont icon-areachart"></i>1,430 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 7 分钟</a>
+		</div>
+		<h1 id="E1编码译码"><a href="#E1编码译码" class="headerlink" title="E1编码译码"></a>E1编码译码</h1><h2 id="E1结构"><a href="#E1结构" class="headerlink" title="E1结构"></a>E1结构</h2><p>时钟2.048M，每秒有2.048M Bit，每秒有8000帧，每帧256Bit，每帧有32个时隙，每个时隙8Bit。</p>
+<p>TS0 – TS31：<br>TS0用作帧同步用，8BIT一般为CRC+固定BIT。<br>TS16用来传输信令。<br>TS1-TS15，TS17-TS31共30个时隙用来传递话路，每路的带宽 8*8000 &#x3D; 64K</p>
+<p>32个隙，32路，其中2路传输专用信息，剩下30路用来传数据。<br>每路传输带宽：8（每帧中的每个时隙是8BIT）* 8000（每秒8000帧） &#x3D; 64K</p>
+<h3 id="E1有成帧、成复帧、不成帧三种方式。"><a href="#E1有成帧、成复帧、不成帧三种方式。" class="headerlink" title="E1有成帧、成复帧、不成帧三种方式。"></a>E1有成帧、成复帧、不成帧三种方式。</h3><p>成帧：第0时隙用于传输帧同步数据，其余31个时隙用于传输有效数据。</p>
+<p>成复帧：除了0时隙外，第16时隙是用于传输命令的，只有第1到第15，第17到第31共30个时隙用于传输有效数据；</p>
+<p>不成帧：所有32个时隙都可用于传输有效数据。</p>
+<p>TS0传送帧定位信号，用于帧同步。<br>TS16传送复帧定位信号，用于复帧同步。<br>所以我们现在做的E1算是成帧结构，没有成复帧，因为我们没有用到16时隙。</p>
+<p>感觉成帧和成复帧区别不大，成帧也是0时隙交替发FAS（带同步码）,NFAS（不带同步码）帧，成复帧也是，根据这个是完全可以识别0-16帧的。</p>
+<h2 id="复帧结构"><a href="#复帧结构" class="headerlink" title="复帧结构"></a>复帧结构</h2><p>16个帧构成1个复帧，前8帧称为SMF I，后8帧称为SMF II，<br>每个SMF长度为256 * 8 &#x3D; 2048 bit 时长 1&#x2F;2.048M * 2048  &#x3D; 1ms，1个复帧时长2ms.</p>
+<p>0,2,4,6…..帧叫偶帧（even），带了帧同步信号，带了帧同步信号的帧又叫FAS帧。</p>
+<p>1,3,5,7,….帧叫奇帧（odd），不带帧同步信号，不带帧同步信号的帧又叫NFAS帧。</p>
+<p>偶数帧里的 0011011，叫做帧同步码。</p>
+<p>奇数帧第0BIT组成的001011叫做复帧同步码。</p>
+<p>我们称TS1至TS15和TS17至TS31为“净荷”，TS0和TS16为“开销”。</p>
+<h2 id="复帧同步结构"><a href="#复帧同步结构" class="headerlink" title="复帧同步结构"></a>复帧同步结构</h2><p>1.偶数帧的TS0，帧同步码0011011。</p>
+<p>2.奇数帧的TS0，非帧同步码。</p>
+<p>3.奇数帧的TS0的BIT0,6个BIT0，001011，CRC复帧同步码。</p>
+<p>4.复帧同步码：第0帧的TS16，前4比特为0000（代码里并没有去这样实现）</p>
+<p>虽然代码里没有在TS16里实现复帧同步码，但是实现奇数帧里的复帧同步码，所以依据这个也是可以解出复帧的，可以识别0-16帧的。</p>
+<h2 id="E1-SSM字节"><a href="#E1-SSM字节" class="headerlink" title="E1 SSM字节"></a>E1 SSM字节</h2><p>SSM字节代表时钟等级信息，可以通过SA4这个BIT来承载，也可以通过SA5 ….SA8来承载。<br>所以在发送的时候，是可以配置通过哪个比特来承载的。</p>
+<h2 id="E1编码"><a href="#E1编码" class="headerlink" title="E1编码"></a>E1编码</h2><h3 id="复帧计数"><a href="#复帧计数" class="headerlink" title="复帧计数"></a>复帧计数</h3><pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;[2:0]:每个时隙8个BIT
+&#x2F;&#x2F;[7:3]:每帧32个时隙
+&#x2F;&#x2F;[11:8]:每个复帧16帧
+always @(posedge clk_sys or negedge rst_n)
+begin
+    if(rst_n &#x3D;&#x3D; 1&#39;b0)
+        cnt &lt;&#x3D; 12&#39;h0    ;
+    else 
+        cnt &lt;&#x3D;#U_DLY cnt + 12&#39;h1    ;
+end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="帧同步码"><a href="#帧同步码" class="headerlink" title="帧同步码"></a>帧同步码</h3><pre class="line-numbers language-none"><code class="language-none">always @(posedge clk_sys)
+begin
+    if(cnt[2:0] &#x3D;&#x3D; 3&#39;h0)
+        frame_sync_data &lt;&#x3D;#U_DLY 8&#39;b00011011    ;
+    else
+        frame_sync_data &lt;&#x3D;#U_DLY &#123;frame_sync_data[6:0],1&#39;b0&#125;  ;
+end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="复帧同步码"><a href="#复帧同步码" class="headerlink" title="复帧同步码"></a>复帧同步码</h3><pre class="line-numbers language-none"><code class="language-none">always @(posedge clk_sys)
+begin
+    if(bit0_flg &#x3D;&#x3D; 1&#39;b1)
+    begin
+        if(ts0_flg &#x3D;&#x3D; 1&#39;b1)
+        begin
+            if(frame0_flg &#x3D;&#x3D; 1&#39;b1)
+                frames_sync_data &lt;&#x3D;#U_DLY 8&#39;b00101111   ;
+            else if(even_flg &#x3D;&#x3D; 1&#39;b1)
+                frames_sync_data &lt;&#x3D;#U_DLY &#123;frames_sync_data[6:0],1&#39;b0&#125;;
+            else
+                ;
+        end
+        else
+            ;
+    end
+    else
+        ;
+end
+
+always @(posedge clk_sys)
+begin
+    if(even_flg &#x3D;&#x3D; 1&#39;b1)
+    begin
+        if((bit1_flg &#x3D;&#x3D; 1&#39;b1)&amp;&amp;(ts0_flg &#x3D;&#x3D; 1&#39;b1))
+        begin
+            case(cnt_1dly[11:9])
+                3&#39;h0:
+                begin
+                    odd_data &lt;&#x3D;#U_DLY &#123;frames_sync_data[7],1&#39;b1,1&#39;b0,ssm_code[3],ssm_code[3],ssm_code[3],ssm_code[3],ssm_code[3]&#125;;
+                end
+                3&#39;h1:
+                begin
+                    odd_data &lt;&#x3D;#U_DLY &#123;frames_sync_data[7],1&#39;b1,1&#39;b0,ssm_code[2],ssm_code[2],ssm_code[2],ssm_code[2],ssm_code[2]&#125;;
+                end
+                3&#39;h2:
+                begin
+                    odd_data &lt;&#x3D;#U_DLY &#123;frames_sync_data[7],1&#39;b1,1&#39;b0,ssm_code[1],ssm_code[1],ssm_code[1],ssm_code[1],ssm_code[1]&#125;;
+                end
+                3&#39;h3:
+                begin
+                    odd_data &lt;&#x3D;#U_DLY &#123;frames_sync_data[7],1&#39;b1,1&#39;b0,ssm_code[0],ssm_code[0],ssm_code[0],ssm_code[0],ssm_code[0]&#125;;
+                end
+                3&#39;h4:
+                begin
+                    odd_data &lt;&#x3D;#U_DLY &#123;frames_sync_data[7],1&#39;b1,1&#39;b0,ssm_code[3],ssm_code[3],ssm_code[3],ssm_code[3],ssm_code[3]&#125;;
+                end
+                3&#39;h5:
+                begin
+                    odd_data &lt;&#x3D;#U_DLY &#123;frames_sync_data[7],1&#39;b1,1&#39;b0,ssm_code[2],ssm_code[2],ssm_code[2],ssm_code[2],ssm_code[2]&#125;;
+                end
+                3&#39;h6:
+                begin
+                    odd_data &lt;&#x3D;#U_DLY &#123;frames_sync_data[7],1&#39;b1,1&#39;b0,ssm_code[1],ssm_code[1],ssm_code[1],ssm_code[1],ssm_code[1]&#125;;
+                end
+                3&#39;h7:
+                begin
+                    odd_data &lt;&#x3D;#U_DLY &#123;frames_sync_data[7],1&#39;b1,1&#39;b0,ssm_code[0],ssm_code[0],ssm_code[0],ssm_code[0],ssm_code[0]&#125;;
+                end
+                default:
+                begin
+                    odd_data &lt;&#x3D;#U_DLY 8&#39;h0  ;
+                end
+            endcase
+        end
+        else
+            ;
+    end
+    else
+        odd_data &lt;&#x3D;#U_DLY &#123;odd_data[6:0],1&#39;b0&#125;;
+end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="crc4"><a href="#crc4" class="headerlink" title="crc4"></a>crc4</h3><pre class="line-numbers language-none"><code class="language-none">always @(posedge clk_sys)
+begin
+    if((cnt[8:0] &#x3D;&#x3D; 9&#39;h2)&amp;&amp;(cnt[10:9] &#x3D;&#x3D; 2&#39;h0))
+    begin
+        crc4_reg[3] &lt;&#x3D;#U_DLY 1&#39;b0 ^ e1_out_pre  ;
+        crc4_reg[2] &lt;&#x3D;#U_DLY (1&#39;b0 ^ e1_out_pre) ^ 1&#39;b0  ;
+        crc4_reg[1] &lt;&#x3D;#U_DLY 1&#39;b0 ;
+        crc4_reg[0] &lt;&#x3D;#U_DLY 1&#39;b0 ;
+    end
+    else
+    begin
+        crc4_reg[3] &lt;&#x3D;#U_DLY crc4_reg[0] ^ e1_out_pre   ;
+        crc4_reg[2] &lt;&#x3D;#U_DLY (crc4_reg[0] ^ e1_out_pre) ^ crc4_reg[3]  ;
+        crc4_reg[1] &lt;&#x3D;#U_DLY crc4_reg[2] ;
+        crc4_reg[0] &lt;&#x3D;#U_DLY crc4_reg[1] ;
+    end
+end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="E1译码"><a href="#E1译码" class="headerlink" title="E1译码"></a>E1译码</h2><h3 id="帧同步信号"><a href="#帧同步信号" class="headerlink" title="帧同步信号"></a>帧同步信号</h3><pre class="line-numbers language-none"><code class="language-none">always @(posedge clk_200m or negedge rst_n) begin
+    if(!rst_n)
+        frame_sync &lt;&#x3D;#U_DLY 0; 
+    else if(temp_reg0[6:0] &#x3D;&#x3D; 7&#39;b0011011)
+        frame_sync &lt;&#x3D;#U_DLY 1;
+    else
+        frame_sync &lt;&#x3D;#U_DLY 0;   
+end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="复帧同步信号"><a href="#复帧同步信号" class="headerlink" title="复帧同步信号"></a>复帧同步信号</h3><pre class="line-numbers language-none"><code class="language-none">case(sync_state)
+    5&#39;d0:begin
+        cnt0       &lt;&#x3D;#U_DLY 9&#39;d0;
+        sync_state &lt;&#x3D;#U_DLY 5&#39;d1;
+    end
+
+    5&#39;d1:begin
+        if(frame_sync)
+            sync_state &lt;&#x3D;#U_DLY 5&#39;d2;
+        else 
+            ;
+    end
+
+    5&#39;d2:begin
+        if(data_vild)
+            cnt0 &lt;&#x3D;#U_DLY cnt0 + 9&#39;d1;
+        else
+            ;
+
+        if(cnt0 &#x3D;&#x3D; 248 &amp;&amp; data_vild)
+            temp_reg1  &lt;&#x3D;#U_DLY &#123;temp_reg1[6:0],e1_in_dly1&#125;;
+        else
+            temp_reg1  &lt;&#x3D;#U_DLY temp_reg1;
+        
+        if(temp_reg1&#x3D;&#x3D;8&#39;b00101111 &amp;&amp; cnt0&#x3D;&#x3D;504)
+            sync_state &lt;&#x3D;#U_DLY 5&#39;d3;
+        else if(temp_reg1!&#x3D;8&#39;b00101111 &amp;&amp; cnt0&#x3D;&#x3D;257)
+            sync_state &lt;&#x3D;#U_DLY 5&#39;d0;
+        else
+            ;
+    end
+
+    5&#39;d3:begin
+        frames_sync &lt;&#x3D;#U_DLY 1;
+        sync_state &lt;&#x3D;#U_DLY 5&#39;d4;
+    end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="SSM信息"><a href="#SSM信息" class="headerlink" title="SSM信息"></a>SSM信息</h3><pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;奇数帧，第0时隙
+always @(posedge clk_200m) begin
+    if(cnt_bit[8:3]&#x3D;&#x3D;6&#39;b100000 &amp;&amp; data_vild)
+        temp_reg3 &lt;&#x3D;#U_DLY &#123;temp_reg3[6:0],e1_in_dly1&#125;;
+    else
+        ;
+end
+
+always @(posedge clk_200m or negedge rst_n) begin
+    if(!rst_n)
+        cnt_sa       &lt;&#x3D;#U_DLY 3&#39;d0;
+    else 
+    if(cnt_bit[8:0]&#x3D;&#x3D;9&#39;h10f &amp;&amp; data_vild)begin
+        sa[cnt_sa]   &lt;&#x3D;#U_DLY temp_reg3 ;
+        cnt_sa       &lt;&#x3D;#U_DLY cnt_sa + 3&#39;d1 ;
+    end
+    else
+        ;
+end
+
+always @(posedge clk_200m) begin
+    if(cnt_bit &#x3D;&#x3D; 12&#39;hfff)begin
+        sa4_code &lt;&#x3D;#U_DLY &#123;sa[0][4],sa[1][4],sa[2][4],sa[3][4],sa[4][4],sa[5][4],sa[6][4],sa[7][4]&#125; ;
+        sa5_code &lt;&#x3D;#U_DLY &#123;sa[0][3],sa[1][3],sa[2][3],sa[3][3],sa[4][3],sa[5][3],sa[6][3],sa[7][3]&#125; ;
+        sa6_code &lt;&#x3D;#U_DLY &#123;sa[0][2],sa[1][2],sa[2][2],sa[3][2],sa[4][2],sa[5][2],sa[6][2],sa[7][2]&#125; ;
+        sa7_code &lt;&#x3D;#U_DLY &#123;sa[0][1],sa[1][1],sa[2][1],sa[3][1],sa[4][1],sa[5][1],sa[6][1],sa[7][1]&#125; ;
+        sa8_code &lt;&#x3D;#U_DLY &#123;sa[0][0],sa[1][0],sa[2][0],sa[3][0],sa[4][0],sa[5][0],sa[6][0],sa[7][0]&#125; ;
+    end
+    else
+        ;
+end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="crc4-1"><a href="#crc4-1" class="headerlink" title="crc4"></a>crc4</h3><pre class="line-numbers language-none"><code class="language-none">crc4c u0_crc4c(
+
+    .clk_sys        (clk_200m),
+    .rst_n          (),
+    .crc_clean      (crc_clean),
+    .crc_vild       (crc_vild),
+    .crc_in         (crc_in),
+    .crc_out        (crc_out )
+
+);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+	</article>
+
+	 
+    <div class="kira-post-copyright">
+        <strong>本文作者：</strong>银月<br>
+        <strong>本文链接：</strong><a href="https://kira.host/E1%E7%BC%96%E7%A0%81%E8%AF%91%E7%A0%81/" title="https:&#x2F;&#x2F;kira.host&#x2F;E1编码译码&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;kira.host&#x2F;E1编码译码&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+  
+	<div class="kira-post-nav">
+		<nav class="post-nav">
+			
+		</nav>
+	</div>
+	
+	<div class="kira-post-meta kira-rainbow">
+		
+		
+			<a class="kirafont icon-tag-fill -none-link" href="/tags/E1/" rel="tag">E1</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/verilog/" rel="tag">verilog</a>
+		
+	</div>
+	
+		<script src="/js/kira-code-copy.js"></script>
+	
+	
+	<div class="kira-post-footer">
+	<link rel="stylesheet" href="https://unpkg.com/gitalk@latest/dist/gitalk.css" />
+	<div id="gitalk"></div>
+	<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+	<script type="text/javascript">
+		var gitalk = new Gitalk({
+			clientID: '-id-',
+			clientSecret: '-key-',
+			id: 'E1编码译码',
+			repo: '-issue repo name-',
+			owner: '-your github username-',
+			admin: '-your github username-',
+			title: '',
+		});
+		gitalk.render('gitalk');
+	</script>
+
+</div>
+	
+</div>
+
+				</div>
+			</div>
+			<div class="kira-right-column">
+	<a onclick="document.querySelector('#kira-top-header').scrollIntoView({behavior: 'smooth'});" class="kira-backtotop" aria-label="回到顶部" title="回到顶部">
+		<button class="mdui-fab mdui-ripple">
+			<i class="kirafont icon-caret-up"></i>
+		</button>
+	</a>
+</div>
+
+		</div>
+	</body>
+</html>

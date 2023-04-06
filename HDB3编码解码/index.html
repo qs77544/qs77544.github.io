@@ -67,8 +67,8 @@
 		</a>
 	</div>
 	<div class="kira-count">
-		<div><span>文章</span>2</div>
-		<div><span>标签</span>3</div>
+		<div><span>文章</span>3</div>
+		<div><span>标签</span>4</div>
 		<div><span>分类</span>0</div>
 	</div>
 	<div class="kira-list">
@@ -178,7 +178,7 @@
 </div>
     
 <div class="kira-widget-wrap">
-	<div id="randomtagcloud" class="kira-widget tagcloud kira-rainbow"><a href="/tags/e1/" style="font-size: 10px;">e1</a> <a href="/tags/hdb3/" style="font-size: 10px;">hdb3</a> <a href="/tags/verilog/" style="font-size: 10px;">verilog</a></div>
+	<div id="randomtagcloud" class="kira-widget tagcloud kira-rainbow"><a href="/tags/E1/" style="font-size: 10px;">E1</a> <a href="/tags/e1/" style="font-size: 10px;">e1</a> <a href="/tags/hdb3/" style="font-size: 10px;">hdb3</a> <a href="/tags/verilog/" style="font-size: 20px;">verilog</a></div>
 	
 </div>
 
@@ -186,7 +186,7 @@
 <div class="kira-widget-wrap">
 	<h3 class="kira-widget-title">文章归档</h3>
 	<div class="kira-widget">
-		<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">2</span></li></ul>
+		<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">3</span></li></ul>
 	</div>
 </div>
 
@@ -274,10 +274,10 @@
 			<a><i class="kirafont icon-areachart"></i>1,127 字</a>
 			<a><i class="kirafont icon-time-circle-fill"></i>大概 5 分钟</a>
 		</div>
-		<h1 id="HDB3编码解码"><a href="#HDB3编码解码" class="headerlink" title="HDB3编码解码"></a><strong>HDB3编码解码</strong></h1><h2 id="编码方案"><a href="#编码方案" class="headerlink" title="编码方案"></a>编码方案</h2><h3 id="HDB3编码规则"><a href="#HDB3编码规则" class="headerlink" title="HDB3编码规则"></a>HDB3编码规则</h3><p>1、对输入为1码元交替翻转编码,即:依次在H+和H-端口输出1。</p>
-<p>2、对输入为0码元同时在H+和H-端口输出0。</p>
-<p>3、当连续输入4个0码元,且与上一个连续0码元之间1码元为奇数个时,第四个0码元改为1码元,且与之前1码元的最后一个1码元同极性,即:在同端口输出。</p>
-<p>4、当连续输入4个0码元,且与上一个连续4个0码元之间1码元为偶数个时,第一个0码元改为1码元，与之前1码元的最后一个1码元反极性,即:在不同端口输出，第四个0码元改为1码元,且与之前1码元的最后一个1码元同极性,即:在同端口输出</p>
+		<h1 id="HDB3编码解码"><a href="#HDB3编码解码" class="headerlink" title="HDB3编码解码"></a><strong>HDB3编码解码</strong></h1><h2 id="编码方案"><a href="#编码方案" class="headerlink" title="编码方案"></a>编码方案</h2><h3 id="HDB3编码规则"><a href="#HDB3编码规则" class="headerlink" title="HDB3编码规则"></a>HDB3编码规则</h3><p>1、对输入为1码元交替翻转编码,即:依次在H+和H-端口输出1;</p>
+<p>2、对输入为0码元同时在H+和H-端口输出0;</p>
+<p>3、当连续输入4个0码元,且与上一个连续0码元之间1码元为奇数个时,第四个0码元改为1码元,且与之前1码元的最后一个1码元同极性,即:在同端口输出;</p>
+<p>4、当连续输入4个0码元,且与上一个连续4个0码元之间1码元为偶数个时,第一个0码元改为1码元，与之前1码元的最后一个1码元反极性,即:在不同端口输出，第四个0码元改为1码元,且与之前1码元的最后一个1码元同极性,即:在同端口输出。</p>
 <h3 id="HDB3编码设计方案"><a href="#HDB3编码设计方案" class="headerlink" title="HDB3编码设计方案"></a>HDB3编码设计方案</h3><p>1、逐位处理输入输出数据,即:每输入一比特数据就判断处理,并在H+和H-端口同时输出一位比特脉冲.</p>
 <p>2、为了能修改含本时钟之前4个时钟周期的输出比特,至少应移位缓存4比特输出</p>
 <p>3、为了能处理本时刻输入的比特,应该至少已知以下状态信息:<br>1）、输出“1”时，确定下次1码元输出端口的确定，即极性是+或-；每输入一个“1”，极性反转一次，记录信息X<br>2）、更新“B00V”时，记录信息Y&#x3D;1，当Y&#x3D;1时，极性再反转一次X，（两次反转即同极性）<br>3）、开辟一个当前是否为连续“0000”；</p>
