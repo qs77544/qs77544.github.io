@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/css/layout.css">
 
 		
-		<title> my-first-blog -  银月の小窝</title>
+		<title> HDB3编码解码 -  银月の小窝</title>
 		<link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
 		<script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
 		<!-- lazyload -->
@@ -266,24 +266,101 @@
 			<img
 				data-src="https://assets.kira.host/Pictures/Others/-f0d5cc34c6e5aa7_compressed.jpg"
 				data-sizes="auto"
-				alt="my-first-blog"
+				alt="HDB3编码解码"
 				class="lazyload kira-post-cover-image disabled-kira-image"
 			/>
-			<h1>my-first-blog</h1>
+			<h1>HDB3编码解码</h1>
 		</div>
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
-			<a><i class="kirafont icon-calendar-fill"></i>2023年03月23日</a>
-			<a><i class="kirafont icon-areachart"></i>0 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 1 分钟</a>
+			<a><i class="kirafont icon-calendar-fill"></i>2023年04月06日</a>
+			<a><i class="kirafont icon-areachart"></i>1,127 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 5 分钟</a>
 		</div>
-		
+		<h1 id="HDB3编码解码"><a href="#HDB3编码解码" class="headerlink" title="HDB3编码解码"></a><strong>HDB3编码解码</strong></h1><h2 id="编码方案"><a href="#编码方案" class="headerlink" title="编码方案"></a>编码方案</h2><h3 id="HDB3编码规则"><a href="#HDB3编码规则" class="headerlink" title="HDB3编码规则"></a>HDB3编码规则</h3><p>1、对输入为1码元交替翻转编码,即:依次在H+和H-端口输出1。</p>
+<p>2、对输入为0码元同时在H+和H-端口输出0。</p>
+<p>3、当连续输入4个0码元,且与上一个连续0码元之间1码元为奇数个时,第四个0码元改为1码元,且与之前1码元的最后一个1码元同极性,即:在同端口输出。</p>
+<p>4、当连续输入4个0码元,且与上一个连续4个0码元之间1码元为偶数个时,第一个0码元改为1码元，与之前1码元的最后一个1码元反极性,即:在不同端口输出，第四个0码元改为1码元,且与之前1码元的最后一个1码元同极性,即:在同端口输出</p>
+<h3 id="HDB3编码设计方案"><a href="#HDB3编码设计方案" class="headerlink" title="HDB3编码设计方案"></a>HDB3编码设计方案</h3><p>1、逐位处理输入输出数据,即:每输入一比特数据就判断处理,并在H+和H-端口同时输出一位比特脉冲.</p>
+<p>2、为了能修改含本时钟之前4个时钟周期的输出比特,至少应移位缓存4比特输出</p>
+<p>3、为了能处理本时刻输入的比特,应该至少已知以下状态信息:</p>
+<p>1）、输出“1”时，确定下次1码元输出端口的确定，即极性是+或-；每输入一个“1”，极性反转一次，记录信息X</p>
+<p>2）、更新“B00V”时，记录信息Y&#x3D;1，当Y&#x3D;1时，极性再反转一次X，（两次反转即同极性）</p>
+<p>3）、开辟一个当前是否为连续“0000”；</p>
+<p>记录两个连续“0000”之前连续1的个数记数，(即奇偶数)Z。</p>
+<p>如何准确识别电路中的 1、V、B。因为 V和B符号是人为标志的符号, 但在电路中最终的表现形式还是逻辑电平 “1”。解决的方法是利用双相码 , 将其用二进制代码分别表示 。双相码的编码规则是:对每个二进制代码分别利用 2个不同相位的二进制码取代 。利用双相码就可以识别电路中的 1、V、B。也可以人为地加入一个标志符(其最终目的也是选择输出“1”的极性), 控制一个开关 ,使输出“1”的极性能按照编码规则进行变化。</p>
+<p>本设计的总体思想并不是首先把消息代码变成 AMI码 ,而是进行 V符号的插入， B符号的操作, 最后完成单极性信号变成双极性信号的转换 （在插入V的时候同时把信息流变成双相码）</p>
+<h3 id="方案代码"><a href="#方案代码" class="headerlink" title="方案代码"></a>方案代码</h3><pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;两个V之间1的个数是偶数个，要加B
+always @(posedge clk_sys or negedge rst_n)
+begin
+    if(rst_n &#x3D;&#x3D; 1&#39;b0)
+        polar_flag_4dly &lt;&#x3D; 1&#39;b0 ;
+    else if( (data_in_4dly &#x3D;&#x3D; 1&#39;b1)
+            ||( (data_in_4dly &#x3D;&#x3D; 1&#39;b0)&amp;&amp;(mzero_flag &#x3D;&#x3D; 1&#39;b1)&amp;&amp;(mzero_flag_cnt &#x3D;&#x3D; 2&#39;h0)&amp;&amp;(odd_flag_4dly &#x3D;&#x3D; 1&#39;b0))
+           )
+        polar_flag_4dly &lt;&#x3D;#U_DLY ~polar_flag_4dly   ;
+end
+&#x2F;&#x2F;输出1有3种情况：
+&#x2F;&#x2F;1.本身码流里的1 
+&#x2F;&#x2F;2.连0个数超过3个，至少4个，可能是000V，也可能是B00V
+always @(posedge clk_sys or negedge rst_n)
+begin
+    if(rst_n &#x3D;&#x3D; 1&#39;b0)
+        hdb3_data0_pre  &lt;&#x3D; 1&#39;b0  ;
+    else if(data_in_4dly &#x3D;&#x3D; 1&#39;b1)
+        hdb3_data0_pre &lt;&#x3D;#U_DLY 1&#39;b1    ;
+    else if(mzero_flag &#x3D;&#x3D; 1&#39;b1)
+    begin
+        if( ((mzero_flag_cnt &#x3D;&#x3D; 2&#39;h0)&amp;&amp;(odd_flag_4dly &#x3D;&#x3D; 1&#39;b0))
+            ||(mzero_flag_cnt &#x3D;&#x3D; 2&#39;h3)
+          )
+            hdb3_data0_pre &lt;&#x3D;#U_DLY 1&#39;b1    ;
+        else
+            hdb3_data0_pre &lt;&#x3D;#U_DLY 1&#39;b0    ;
+    end
+    else
+        hdb3_data0_pre &lt;&#x3D;#U_DLY 1&#39;b0    ;
+end
+&#x2F;&#x2F;输出1的符号，是+1，还是-1。
+always @(posedge clk_sys or negedge rst_n)
+begin
+    if(rst_n &#x3D;&#x3D; 1&#39;b0)
+        hdb3_data1 &lt;&#x3D; 1&#39;b0  ;
+    else if(hdb3_data0_pre &#x3D;&#x3D; 1&#39;b1)
+        hdb3_data1 &lt;&#x3D;#U_DLY polar_flag_4dly ;
+    else
+        hdb3_data1 &lt;&#x3D;#U_DLY 1&#39;b0    ;
+end
+&#x2F;&#x2F;输出是1，还是0
+always @(posedge clk_sys or negedge rst_n)
+begin
+    if(rst_n &#x3D;&#x3D; 1&#39;b0)
+        hdb3_data0 &lt;&#x3D; 1&#39;b0   ;
+    else
+        hdb3_data0 &lt;&#x3D;#U_DLY hdb3_data0_pre  ;
+end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="解码方案"><a href="#解码方案" class="headerlink" title="解码方案"></a>解码方案</h2><p>对于HDB3的编码来说，解码是相对比较简单的，主要实现内容就是寻找连续两个零与连续三个的零。插入V&#x2F;B的情况是有两种，两个或三个零两端同极性，也就是要把代码二进制表示的“+1 0 0 0 +1”或“-1 0 0 0 -1”变成“1 0 0 0”，把“+1 0 0 +1”或“-1 0 0 -1”变成“0 0 0 0”，最后再把两位二进制表示的+1和-1都变成‘1’，两位二进制表示的0都变成一位二进制表示的‘0’就可以了。</p>
+<h3 id="方案代码-1"><a href="#方案代码-1" class="headerlink" title="方案代码"></a>方案代码</h3><pre class="line-numbers language-none"><code class="language-none">always@(posedge clk )begin
+    if(data_vild)
+        if(temp_reg1&#x3D;&#x3D;5&#39;b10001 &amp;&amp; temp_reg0&#x3D;&#x3D;5&#39;b10001)
+            temp_regout &lt;&#x3D;#U_DLY  5&#39;b10000;
+        else if(temp_reg1&#x3D;&#x3D;5&#39;b00000 &amp;&amp; temp_reg0&#x3D;&#x3D;5&#39;b10001)
+            temp_regout &lt;&#x3D;#U_DLY  5&#39;b10000;
+        else if(temp_reg1[3:0]&#x3D;&#x3D;4&#39;b1001 &amp;&amp; temp_reg0[3:0]&#x3D;&#x3D;4&#39;b1001) 
+            temp_regout &lt;&#x3D;#U_DLY  &#123;temp_regout[4],4&#39;b0000&#125;;
+        else if(temp_reg1[3:0]&#x3D;&#x3D;4&#39;b0000 &amp;&amp; temp_reg0[3:0]&#x3D;&#x3D;4&#39;b1001)   
+            temp_regout &lt;&#x3D;#U_DLY  &#123;temp_regout[4],4&#39;b0000&#125;;
+        else
+            temp_regout &lt;&#x3D;#U_DLY  &#123;temp_regout[3:0],temp_reg0[0]&#125; ;
+end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
 	</article>
 
 	 
     <div class="kira-post-copyright">
         <strong>本文作者：</strong>银月<br>
-        <strong>本文链接：</strong><a href="https://kira.host/my-first-blog/" title="https:&#x2F;&#x2F;kira.host&#x2F;my-first-blog&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;kira.host&#x2F;my-first-blog&#x2F;</a><br>
+        <strong>本文链接：</strong><a href="https://kira.host/HDB3%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81/" title="https:&#x2F;&#x2F;kira.host&#x2F;HDB3编码解码&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;kira.host&#x2F;HDB3编码解码&#x2F;</a><br>
         
             <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
         
@@ -298,6 +375,8 @@
 	
 	<div class="kira-post-meta kira-rainbow">
 		
+		
+			<a class="kirafont icon-tag-fill -none-link" href="/tags/e1/" rel="tag">e1</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/hdb3/" rel="tag">hdb3</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/verilog/" rel="tag">verilog</a>
 		
 	</div>
 	
