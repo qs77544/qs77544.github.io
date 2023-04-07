@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html 
+	lang="zh_CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+<link rel="stylesheet" href="/css/layout.css">
+
+		
+		<title> 使用PlantUml绘制逻辑时序图/波形图 -  银月の小窝</title>
+		<link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+		<script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+		<!-- lazyload -->
+		<script src="https://unpkg.com/lazysizes@5.1.0/lazysizes.min.js"></script>
+		<!-- smooth-scrolling -->
+		<script src="https://unpkg.com/smooth-scrolling.js@1.0.0"></script>
+		<!-- highlight -->
+		<link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.6.0/styles/atom-one-dark.min.css" />
+		<script src="//unpkg.com/@highlightjs/cdn-assets@11.6.0/highlight.min.js"></script>
+		<!-- 预置 kiraicon -->
+		<link rel="stylesheet" href="/lib/iconfont/iconfont.css" crossorigin />
+		
+			<link rel="stylesheet" href="//at.alicdn.com/t/font_3299330_el19bsi97h8.css" crossorigin />
+		
+		<link rel="stylesheet" href="/lib/iconfont/iconfont.css" crossorigin />
+		<link
+			rel="shortcut icon"
+			href="https://assets.kira.host/Pictures/Others/116359b4ccf19917.jpg"
+			type="image/png"
+		/>
+		<link rel="stylesheet" href="/deps/css/APlayer.min.css">
+		
+		<script src="/deps/js/APlayer.min.js"></script>
+		<script src="/deps/js/Meting.min.js"></script>
+	<meta name="generator" content="Hexo 6.3.0"></head>
+
+	<body>
+		<div
+			class="kira-background"
+			style="background-image: url('https://assets.kira.host/Pictures/Others/-f0d5cc34c6e5aa7_compressed.jpg')"
+		></div>
+		<div class="kira-header">
+    <a
+        class="kira-drawer-button mdui-ripple"
+        title="导航栏"
+        onclick="document.querySelector('.kira-sidebar-modal').classList.add('show');document.querySelector('.kira-sidebar#sidebar').classList.add('show');"
+    >
+        <i class="kirafont icon-menu"></i>
+    </a>
+    <a href="/" title="银月の小窝">
+        <img
+			src="https://raw.githubusercontent.com/qs77544/pic/main/QQ图片20230406144244.jpg"
+			alt="银月"
+		/>
+    </a>
+</div>
+		<div class="kira-body">
+			<div class="kira-sidebar" id="sidebar">
+	<div class="kira-avatar mdui-ripple">
+		<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/qs77544/pic/main/QQ图片20230406144244.jpg" title="银月">
+			<img
+				src="https://raw.githubusercontent.com/qs77544/pic/main/QQ图片20230406144244.jpg"
+				alt="银月"
+			/>
+		</a>
+	</div>
+	<div class="kira-count">
+		<div><span>文章</span>4</div>
+		<div><span>标签</span>5</div>
+		<div><span>分类</span>1</div>
+	</div>
+	<div class="kira-list">
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/"
+			title="回到首页"
+		>
+			<i
+				class="kirafont icon-home"
+			></i>
+			<div class="kira-list-item-content">回到首页</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/archive.html"
+			title="文章归档"
+		>
+			<i
+				class="kirafont icon-container"
+			></i>
+			<div class="kira-list-item-content">文章归档</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/about.html"
+			title="关于本人"
+		>
+			<i
+				class="kirafont icon-user"
+			></i>
+			<div class="kira-list-item-content">关于本人</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/friends.html"
+			title="我的朋友"
+		>
+			<i
+				class="kirafont icon-team"
+			></i>
+			<div class="kira-list-item-content">我的朋友</div>
+		</a>
+		
+	</div>
+	<aside id="kira-sidebar">
+		 <div class="kira-widget-wrap">
+	<div class="kira-widget kira-social">
+		<a
+			class="mdui-ripple"
+			href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=972527342&website=www.oicqzone.com"
+			target="_blank"
+			mdui-tooltip="{content: 'QQ'}"
+			style="
+				color: rgb(49, 174, 255);
+				background-color: rgba(49, 174, 255, .1);
+			"
+		>
+			<i
+				class="kirafont icon-QQ"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://space.bilibili.com/8456366"
+			target="_blank"
+			mdui-tooltip="{content: '哔哩哔哩'}"
+			style="
+				color: rgb(231, 106, 141);
+				background-color: rgba(231, 106, 141, .15);
+			"
+		>
+			<i
+				class="kirafont icon-bilibili"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://github.com/qs77544/"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(25, 23, 23);
+				background-color: rgba(25, 23, 23, .15);
+			"
+		>
+			<i
+				class="kirafont icon-github"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://gitee.com/qs77544"
+			target="_blank"
+			mdui-tooltip="{content: 'Gitee'}"
+			style="
+				color: rgb(165, 15, 15);
+				background-color: rgba(165, 15, 15, .15);
+			"
+		>
+			<i
+				class="kirafont icon-gitee"
+			></i> </a
+		>
+	</div>
+</div>
+  
+<div class="kira-widget-wrap">
+  <h3 class="kira-widget-title">分类</h3>
+  <div class="kira-widget">
+
+    <ul class="category-list">
+
+      
+
+
+      
+
+      
+
+      <li class="category-list-item">
+        <a class="category-list-link" href="/categories/Tools/">Tools</a>
+        <span class="category-list-count">1</span>
+      </li>
+
+      
+    </ul>
+
+  </div>
+</div>
+  
+<div class="kira-widget-wrap">
+	<div id="randomtagcloud" class="kira-widget tagcloud kira-rainbow"><a href="/tags/E1/" style="font-size: 20px;">E1</a> <a href="/tags/hdb3/" style="font-size: 10px;">hdb3</a> <a href="/tags/plantuml/" style="font-size: 10px;">plantuml</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/verilog/" style="font-size: 20px;">verilog</a></div>
+	
+</div>
+
+  
+<div class="kira-widget-wrap">
+	<h3 class="kira-widget-title">文章归档</h3>
+	<div class="kira-widget">
+		<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">4</span></li></ul>
+	</div>
+</div>
+
+ 
+	</aside>
+	<div class="kira-copyright">
+		&copy; 2023
+		<a href="/">银月</a
+		>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> &
+		<!-- TODO: github 链接 -->
+		<a href="https://github.com/ch1ny/kira-hexo/" target="_blank">Kira-Hexo</a>
+		<br />
+		
+			<a href="https://beian.miit.gov.cn/" target="_blank">赣ICP备2021007955号-3</a>
+		
+		
+	</div>
+</div>
+<div class="kira-sidebar-modal" id="sidebar-modal" onclick="(function(self) {
+	self.classList.remove('show');
+	document.querySelector('.kira-sidebar.show#sidebar').classList.remove('show');
+})(this)"></div>
+			<div class="kira-content">
+				<div id="kira-top-header"></div>
+				<div class="kira-main-content">
+					
+<link rel="stylesheet" href="/css/kira-image.css">
+
+<script src="/js/kira-image.js"></script>
+<div class="kira-image">
+    <div class="kira-image-modal">
+        <div class="kira-image-header">
+            <div class="kira-image-counter"></div>
+            <div class="kira-image-title"></div>
+            <div class="kira-image-operation">
+                <div class="kira-image-operation-button" id="kira-image-operation-button-zoom">
+                    <i class="kirafont icon-zoom-in"></i>
+                </div>
+                <div class="kira-image-operation-button" id="kira-image-operation-button-close">
+                    <i class="kirafont icon-close"></i>
+                </div>
+            </div>
+        </div>
+        <div class="kira-image-container">
+            <div class="kira-image-prev-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-left"></i>
+                </div>
+            </div>
+            <div class="kira-image-list">
+                <div class="kira-image-prev">
+                    <img />
+                </div>
+                <div class="kira-image-now">
+                    <img />
+                </div>
+                <div class="kira-image-next">
+                    <img />
+                </div>
+            </div>
+            <div class="kira-image-next-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="kira-post">
+	<article>
+		
+		<div class="kira-post-cover">
+			<img
+				data-src="https://raw.githubusercontent.com/qs77544/pic/main/91988144_p0.jpg"
+				data-sizes="auto"
+				alt="使用PlantUml绘制逻辑时序图/波形图"
+				class="lazyload kira-post-cover-image disabled-kira-image"
+			/>
+			<h1>使用PlantUml绘制逻辑时序图/波形图</h1>
+		</div>
+		
+		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
+			<a><i class="kirafont icon-calendar-fill"></i>2023年04月07日</a>
+			<a><i class="kirafont icon-areachart"></i>1,255 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 6 分钟</a>
+		</div>
+		<h1 id="使用PlantUml绘制逻辑时序图-x2F-波形图"><a href="#使用PlantUml绘制逻辑时序图-x2F-波形图" class="headerlink" title="使用PlantUml绘制逻辑时序图&#x2F;波形图"></a>使用PlantUml绘制逻辑时序图&#x2F;波形图</h1><h2 id="使用PlantUml绘制时序图，波形图的简单说明如下。"><a href="#使用PlantUml绘制时序图，波形图的简单说明如下。" class="headerlink" title="使用PlantUml绘制时序图，波形图的简单说明如下。"></a>使用PlantUml绘制时序图，波形图的简单说明如下。</h2><h3 id="时钟"><a href="#时钟" class="headerlink" title="时钟"></a>时钟</h3><p>时钟信号使用clock关键词声明，使用offset设置相位，使用pulse设置脉宽。默认相位为0，占空比为50%。</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/74cc882aa4cc50d27ca25ce79c403d41.png"></p>
+<pre class="line-numbers language-none"><code class="language-none">@startuml x
+clock &quot;clk0&quot; as clk0  with period 100
+clock &quot;clk1&quot; as clk1  with period 100 offset 20
+clock &quot;clk2&quot; as clk2  with period 100 offset 100
+clock &quot;clk3&quot; as clk3  with period 100 pulse 30
+clock &quot;clk4&quot; as clk4  with period 100 pulse 30 offset 20
+ 
+@0
+@1000
+@enduml<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Tips：</p>
+<ol>
+<li><p>plantuml时钟信号上升沿和下降沿都是垂直的，无法设置上升和下降时间，可以使用offset，使时钟和信号边沿错开，来表达采样逻辑时序，如图中clk1和clk4。</p>
+</li>
+<li><p>plantuml的时钟信号默认都是高电平开始，如果需要低电平开始，可以把offset设置为period，即延后一个周期开始，如图中的clk2。</p>
+</li>
+</ol>
+<h3 id="逻辑信号"><a href="#逻辑信号" class="headerlink" title="逻辑信号"></a>逻辑信号</h3><p>plantuml中使用binary，concise和robust声明逻辑变量，</p>
+<p>concise：简明的图形化数据表示，可表示数据的移动（非常适合表示信息）。</p>
+<p>robust：用信号线表示的状态，便于呈现状态间的转化（可设置多种状态）。</p>
+<p>binary：二进制信号，只有两个状态。(binary)。</p>
+<p>逻辑信号值使用“is”表达</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/22b9fa8f79b2c25befc28bf444524408.png"></p>
+<pre class="line-numbers language-none"><code class="language-none">@startuml x
+ 
+clock clk with period 20 offset 1
+binary &quot;en&quot; as en
+robust &quot;fsm_state&quot; as fsm
+concise &quot;addr&quot; as addr
+ 
+fsm is idle
+en is high
+ 
+@0
+en is low
+fsm is &quot;busy&quot;
+addr is &#123;-&#125;
+ 
+@20
+en is high
+fsm is &quot;start&quot;
+addr is &quot;0xFF&quot;
+@30
+addr is &quot;0xA5A5&quot;
+fsm is &#123;idle,start&#125;
+@40
+en is 0
+fsm is &quot;busy&quot;
+@60
+en is &#123;0,1&#125;
+@70
+en is 1
+fsm is &quot;idle&quot;
+addr is &quot;0xDEAD&quot;
+ 
+@100
+@enduml<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>Tips：</p>
+<ol>
+<li><p>初始值设置,<br>在声明变量后，@标注时间前，使用”A is B”的格式，将A的初始值设置为B。不能对时钟信号设置初始值。</p>
+</li>
+<li><p>不定态设置,<br>使用”A is {X,Y}”的方式，将信号A的值设置在X和Y之间，表示一种不定范围。特殊的”A is {-}”表示A是不定态或高阻。</p>
+</li>
+</ol>
+<h3 id="添加消息"><a href="#添加消息" class="headerlink" title="添加消息"></a>添加消息</h3><p>有时某两个变化点代表了一种状态或者场景时序，即一种消息。类似wavedrom中的edge。在两个信号变量之间使用-&gt;即可添加消息。</p>
+<p>如果需要在不同时刻节点之间添加消息，使用@+时间表示延后的时刻点。</p>
+<p>en-&gt;fsm@+50：stop now.</p>
+<p>表示消息的起点是当前时刻的en信号，终点是50单位以后的fsm信号。</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/ac675ac859fc84d03cfd4526e48d6dfc.png"></p>
+<pre class="line-numbers language-none"><code class="language-none">@startuml x
+ 
+clock clk with period 20 offset 1
+binary &quot;en&quot; as en
+robust &quot;fsm_state&quot; as fsm
+concise &quot;addr&quot; as addr
+ 
+fsm is idle
+en is high
+ 
+@0
+en is low
+fsm is &quot;busy&quot;
+addr is &#123;-&#125;
+en -&gt;addr : start now!
+ 
+@20
+en is high
+fsm is &quot;start&quot;
+addr is &quot;0xFF&quot;
+en -&gt; fsm@+50: stop now!
+@30
+addr is &quot;0xA5A5&quot;
+fsm is &#123;idle,start&#125;
+@40
+en is 0
+fsm is &quot;busy&quot;
+@60
+en is &#123;0,1&#125;
+@70
+en is 1
+fsm is &quot;idle&quot;
+addr is &quot;0xDEAD&quot;
+ 
+@100
+@enduml<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="基于时间click描述信号时序"><a href="#基于时间click描述信号时序" class="headerlink" title="基于时间click描述信号时序"></a>基于时间click描述信号时序</h3><p>plantuml中可以使用时间click方式描述信号的时序关系，即在每个时刻点，描述各个信号的取值。click方式包括绝对时间和相对时间两种。</p>
+<p>绝对时间方式在每个需要描述信号变化的时刻使用”@时刻”声明。</p>
+<p>相对时间方式表示在相对前一节点延后一段时间后的时刻节点，使用”@+时间”表示。</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/dfa66c28d79f009f415cc113db75f5ab.png"></p>
+<pre class="line-numbers language-none"><code class="language-none">@startuml x
+ 
+clock clk with period 20 offset 1
+binary &quot;en&quot; as en
+concise &quot;addr&quot; as addr
+ 
+en is high
+ 
+@0
+en is low
+addr is &#123;-&#125;
+ 
+@20
+en is high
+addr is &quot;0xFF&quot;
+ 
+@+10 &#x2F;&#39;绝对时刻&#x3D;20+10&#x3D;30&#39;&#x2F;
+addr is &quot;0xA5A5&quot;
+en -&gt; addr : @30
+@+30 &#x2F;&#39;绝对时刻&#x3D;30+30&#x3D;60&#39;&#x2F;
+en is 1
+addr is &quot;0xDEAD&quot;
+en -&gt; addr : @60
+ 
+@+20 &#x2F;&#39;绝对时刻&#x3D;60+20&#x3D;80&#39;&#x2F;
+en -&gt; addr : @80
+@enduml<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="基于信号的时序描述"><a href="#基于信号的时序描述" class="headerlink" title="基于信号的时序描述"></a>基于信号的时序描述</h3><p>plantuml中可以使用基于信号的描述，即描述单个信号在所有时刻点的变化。</p>
+<p>此种方式下，绝对时间的信号取值使用”时刻 is X”的格式描述，相对时间的信号取值使用”@+时间 is X”的格式描述。</p>
+<p>在任何一个信号时序描述集合里，可以在任意时间节点添加消息</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/2caadb3bbff98b1cb0517993ebf514d6.png"></p>
+<pre class="line-numbers language-none"><code class="language-none">@startuml x
+ 
+clock clk with period 20 offset 1
+binary &quot;en&quot; as en
+concise &quot;addr&quot; as addr
+ 
+en is high
+ 
+@en
+0 is low
+20 is high
++30 is 0
+addr -&gt; en : A label
++20 is  0
+ 
+@addr
+0 is &#123;-&#125;
+10 is &quot;0xFF&quot;
+20 is &#123;-&#125;
+en -&gt; addr : A label
++30 is &quot;0xA5A5&quot;
+ 
+@enduml<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ol>
+<li><p>基于时间click和信号的时序描述可以混合使用</p>
+</li>
+<li><p>双向约束’&lt;-&gt;’在plantuml中表示约束关系，只能在基于信号的时序描述中，并且是同一个信号的不同时刻间使用。</p>
+</li>
+<li><p>隐藏时间轴。使用：hide-axis声明即可。</p>
+</li>
+<li><p>高亮区域。使用：’highlight T0 to T1 #Gold;line:DimGrey : Label’方式声明。</p>
+</li>
+<li><p>改变线条颜色。在信号值描述语句后使用’#颜色’方式设置</p>
+</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/ee8365fe6fd3473f853985f5d5f2636e.png"></p>
+<pre class="line-numbers language-none"><code class="language-none">@startuml x
+hide time-axis
+ 
+clock clk with period 20 offset 1
+binary &quot;en&quot; as en
+concise &quot;addr&quot; as addr
+ 
+@en
+0 is low
+20 is high #black
++30 is 0
+@10 &lt;-&gt; @70 : A constraint
+ 
+@addr
+0 is &#123;-&#125;
+10 is &quot;0xFF&quot;
+20 is &#123;-&#125;
++20 is &quot;0xA5A5&quot; #pink 
+ 
+@80
+en is 1
+addr is &quot;0xDEAD&quot;
+ 
+@100
+en is 0
+addr is &#123;-&#125;
+highlight 70 to 90 #Gold : Highlight Area
+@enduml<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/cc_hook/article/details/127949279">https://blog.csdn.net/cc_hook/article/details/127949279</a></p>
+
+	</article>
+
+	 
+    <div class="kira-post-copyright">
+        <strong>本文作者：</strong>银月<br>
+        <strong>本文链接：</strong><a href="https://qs77544.top/%E4%BD%BF%E7%94%A8PlantUml%E7%BB%98%E5%88%B6%E9%80%BB%E8%BE%91%E6%97%B6%E5%BA%8F%E5%9B%BE-%E6%B3%A2%E5%BD%A2%E5%9B%BE/" title="https:&#x2F;&#x2F;qs77544.top&#x2F;使用PlantUml绘制逻辑时序图-波形图&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;qs77544.top&#x2F;使用PlantUml绘制逻辑时序图-波形图&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+  
+	<div class="kira-post-nav">
+		<nav class="post-nav">
+			  
+			<!-- 先找到与当前文字相同的目录 -->
+			   
+			<!-- 在找到当前文章所在的 index -->
+			          
+		</nav>
+	</div>
+	
+	<div class="kira-post-meta kira-rainbow">
+		
+			<a class="kirafont icon-appstore-fill -link" href="/categories/Tools/">Tools</a>
+		
+		
+			<a class="kirafont icon-tag-fill -none-link" href="/tags/plantuml/" rel="tag">plantuml</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/tool/" rel="tag">tool</a>
+		
+	</div>
+	
+		<script src="/js/kira-code-copy.js"></script>
+	
+	
+	<div class="kira-post-footer">
+	<link rel="stylesheet" href="https://unpkg.com/gitalk@latest/dist/gitalk.css" />
+	<div id="gitalk"></div>
+	<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+	<script type="text/javascript">
+		var gitalk = new Gitalk({
+			clientID: '-id-',
+			clientSecret: '-key-',
+			id: '使用PlantUml绘制逻辑时序图/波形图',
+			repo: '-issue repo name-',
+			owner: '-your github username-',
+			admin: '-your github username-',
+			title: '',
+		});
+		gitalk.render('gitalk');
+	</script>
+
+</div>
+	
+</div>
+
+				</div>
+			</div>
+			<div class="kira-right-column">
+	<a onclick="document.querySelector('#kira-top-header').scrollIntoView({behavior: 'smooth'});" class="kira-backtotop" aria-label="回到顶部" title="回到顶部">
+		<button class="mdui-fab mdui-ripple">
+			<i class="kirafont icon-caret-up"></i>
+		</button>
+	</a>
+</div>
+
+		</div>
+	</body>
+</html>
